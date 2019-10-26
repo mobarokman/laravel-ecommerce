@@ -1,0 +1,113 @@
+@section('title', 'Category')
+@extends('layouts/master')
+@section('content')
+
+
+<!-- ============================================================== -->
+<!-- pageheader  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title manage-category">Manage Category </h2>
+            <a href="#" class=" btn btn-info add-category-btn" data-toggle="modal" data-target="#exampleModal">Add Category</a>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{url('/')}}" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader  -->
+<!-- ============================================================== -->
+    
+<div class="row">
+    <!-- ============================================================== -->
+    <!-- responsive table -->
+    <!-- ============================================================== -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="tbl-head" >Category List</h5>
+                <div class="search-box">
+                    <div class="input-group input-search">
+                        <input class="form-control" type="text" placeholder="Search mail..."><span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                    </div>
+                </div> <!-- search box -->
+            </div> <!-- card header -->
+            <div class="card-body">
+                <div class="table-responsive ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto will be hare</td>
+                                <td>photo</td>
+                                <td>Active</td>
+                                <td><button class="btn btn-info">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!--card body --> 
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end responsive table -->
+    <!-- ============================================================== -->
+</div> <!--end row-->
+
+
+                         
+    <!-- ============================================================== -->
+    <!-- modal  -->
+    <!-- ============================================================== -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </a>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Woohoo, You are readng this text in a modal! Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                    <a href="#" class="btn btn-primary">Save changes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- modal  -->
+    <!-- ============================================================== -->
+
+
+@endsection

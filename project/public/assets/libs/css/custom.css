@@ -1,0 +1,21 @@
+
+
+/* this 2 class style for manage_category.blade.php page's Table>Card header> card heading and search box */
+.tbl-head{
+    display: inline;
+    float: left;
+}
+.search-box{
+    display: inline;
+    float: right;
+}
+
+.manage-category{
+    float: left;
+    display: inline;
+}
+
+.add-category-btn{
+    display: inline-block;
+    margin-left: 68%;
+}
