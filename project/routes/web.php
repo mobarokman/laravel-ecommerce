@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('category', 'Admin\CategoryController');
 
+// "as is route name", "prefix is url prfix"
+Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>'auth'], function (){
+
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
+    Route::resource('category', 'CategoryController');
+    Route::get('category-data', 'CategoryController@categoryData')->name('categoryData');
+    Route::resource('sub-category', 'SubCategoryController');
+    Route::get('sub-category-data', 'SubCategoryController@subCategoryData')->name('subCategoryData');
+
+
+    
+});

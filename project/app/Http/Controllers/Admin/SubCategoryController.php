@@ -4,80 +4,106 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use App\Model\Category;
+use App\Model\Subcategory;
+use Validator;
 
 class SubCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $category = Category::all();
+        return view('admin.sub_category.manage_sub_category', ['category' => $category]);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function subCategoryData(Request $request){
+        $data["perPage"] = $request->input("perPage", 5);
+        $data["page"] = $request->input("page", 1);
+        $data["search"] = $search = $request->search;       
+
+        $data["subcategory"] = Subcategory::when($search, function($query) use ($search){
+            $query->where("sub_categories.sub_category_name", "LIKE", "%{$search}%");
+        })
+        ->latest()
+        ->paginate($data["perPage"]);
+
+        return view("admin.sub_category.sub_category_data", $data);
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $cat_name = $request->category_name;
+        $sub_cat_name = $request->sub_category_name;
+        $slug = Str::slug($request->sub_category_name);
+        $des = $request->description;
+        $status = "0";
+        
+        $photo = $request->Input('photo', 'default.png');
+    
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required',
+            'sub_category_name' => 'required',
+            'description' => 'required',
+            // 'photo' => 'required|mimes:jpeg,bmp,png,jpg',
+        ]);
+
+        if ($validator->fails()) {
+            // return redirect(route('category.index'))
+            //             ->withErrors($validator)
+            //             ->withInput();
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors()
+            ]);
+          
+        } else {
+            $category = new Subcategory;
+            $category->category_id = $cat_name;
+            $category->sub_category_name = $sub_cat_name;
+            $category->slug = $slug;
+            $category->description = $des;
+            $category->photo = $photo;
+            $category->status = $status;
+            $category->save();
+        }
+       //return redirect(route('category.index'));
+        return response()->json([
+        'fail' => false,
+        'redirect_url' => route('admin.sub-category.index'),
+        'message' => 'Successfully created a new category',
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

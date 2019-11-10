@@ -12,10 +12,10 @@
 
 .manage-category{
     float: left;
-    display: inline;
+    display: inline-block;
 }
 
 .add-category-btn{
     display: inline-block;
-    margin-left: 68%;
+    margin-left: 50%;
 }
