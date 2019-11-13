@@ -25,13 +25,15 @@ class CategoryController extends Controller
         $data["page"] = $request->input("page", 1);
         $data["search"] = $search = $request->search;       
         $data["subCat"] = Subcategory::all();
-        $data["category"] = Category::when($search, function($query) use ($search){
+        $data["categories"] =Category::with('subcategories')->when($search, function($query) use ($search){
             $query->where("categories.category_name", "LIKE", "%{$search}%");
         })
         ->latest()
         ->paginate($data["perPage"]);
 
-        // dd($data["category"]);
+
+        // print_r( '<pre>'.'<br>' . $data["category"]);
+        // exit();
         return view("admin.category.category_data", $data);
     }
 

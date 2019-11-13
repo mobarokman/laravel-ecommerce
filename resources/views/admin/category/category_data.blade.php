@@ -16,23 +16,30 @@
 @endforeach --}}
     <tbody>
         @php $num=(($page-1)*$perPage)+1; @endphp
-        @foreach($category as $cat)
+        @foreach($categories as $category)
+     
         <tr>
         <th scope="row">{{ $num++ }}</th>
             <td>
-                {{$cat->category_name}}
-               
-              
+                {{$category->category_name}}
+                @foreach($category->subcategories as $subcat)
+                <ul><li>{{$subcat->sub_category_name}}</li></ul>
+                @endforeach
             </td>
-            <td>{{$cat->description}}</td>
-            <td>{{$cat->photo}}</td>
-            <td>{{$cat->status}}</td>
+           
+         
+             
+           
+     
+            <td>{{$category->description}}</td>
+            <td>{{$category->photo}}</td>
+            <td>{{$category->status}}</td>
             <td> 
                 <!--edit button -->           
-                <a href="{{route('admin.category.edit', $cat->category_id)}}" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#editCategoryModal" id="editButton"> <i class=" fas fa-edit"></i></a>
+                <a href="{{route('admin.category.edit', $category->category_id)}}" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#editCategoryModal" id="editButton"> <i class=" fas fa-edit"></i></a>
 
                 <!-- delete form --> 
-               <form id="deleteForm" style="display: inline;" method="post" action="{{ route('admin.category.destroy', $cat->category_id) }}">
+               <form id="deleteForm" style="display: inline;" method="post" action="{{ route('admin.category.destroy', $category->category_id) }}">
                     @csrf
                     @method('DELETE') 
                      <button id="deleteButton" class="btn btn-sm btn-outline-light">
@@ -41,10 +48,11 @@
                 </form>
         </td>
         </tr>
+      
         @endforeach 
     </tbody>
 </table>
-{{$category->links()}}
+{{$categories->links()}}
 
 
     <!-- ============================================================== -->

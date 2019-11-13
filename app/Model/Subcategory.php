@@ -12,6 +12,6 @@ class Subcategory extends Model
     protected $guarded = [];
 
     public function category() {
-        return $this->belongTo(Category::class);
+        return $this->belongsTo('App\Model\Category');
     }
 }
