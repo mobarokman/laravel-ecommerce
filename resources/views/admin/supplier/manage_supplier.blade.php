@@ -134,7 +134,7 @@
                                 <div class="form-group col-md-8">
                                         <label for="exampleFormControlTextarea2">Short Description</label>
                                         <textarea name="description" class="form-control" id="exampleFormControlTextarea2 description" rows="3" placeholder="Write Short Description"></textarea>
-                                        <span id="error-description" class="invalid-feedback">thth</span>
+                                        <span id="error-description" class="invalid-feedback"></span>
                                     </div>
                            </div>
 
@@ -238,6 +238,80 @@
             }); //ajax
         });  //submit from#form
 
+      //start script 3:::
+   
+    //load edit modal with selected id
+    $("#supplierData").on('click', "#editButton", function(e) {
+        $("#editSupplierModal").on("show.bs.modal", function(e) {
+            var link = $(e.relatedTarget);
+            $(this).find(".modal-content").load(link.attr("href"));
+        });
+
+       //edit notice ajax submit and validation
+        $(document).on('submit', 'form#editSupplierForm', function (event) {
+            event.preventDefault();
+        
+            var form = $(this);
+            var data = new FormData($(this)[0]);
+            var url = form.attr("action");
+            var method = form.attr("method");
+        
+            $.ajax({
+                type: method,
+                url: url,
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $('.is-invalid').removeClass('is-invalid');
+                    if (data.fail) {   
+                        for (control in data.errors) {
+                            $('input[name=' + control + ']').addClass('is-invalid');
+                            $('textarea[name=' + control + ']').addClass('is-invalid');
+                            $('#error-' + control).html(data.errors[control]);
+                            }
+                    } else {
+                        $('#editSupplierModal').modal('hide');
+                        supplierData();
+                    } //else
+
+                }, //success method from ajax
+            }); // this ajax
+        });  //submit from#editNoticeForm
+        
+    }); //#noticeData || #editButton
+    //end script 3
+
+              //start script 4:::
+      //delete notice
+      $("#supplierData").on('click', "#deleteButton", function(e) {
+        //edit notice ajax submit and validation
+        $(document).on('submit', 'form#deleteForm', function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var data = new FormData($(this)[0]);
+        var url = form.attr("action");
+        var method = form.attr("method");
+
+        $.ajax({
+            type: method,
+            url: url,
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                    alert('Record deleted');
+                    supplierData();
+                } 
+
+            }); //this ajax
+
+        }); //#deleteForm
+        }); //#deleteButton
+
+        //end script 4
 
 
   });

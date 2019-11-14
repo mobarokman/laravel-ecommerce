@@ -48,7 +48,7 @@
         <!-- ============================================================== -->
         <!-- Modal -->
         <div class="modal fade" id="editSupplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <!-- here data come from 'edit_category.blade.php' page -->                
                     </div>

@@ -52,7 +52,7 @@ class SupplierController extends Controller
 
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
-            'email'  => 'required',
+            'email'  => 'required|email',
             'phone'  => 'required',
             'address'  => 'required',
 
@@ -76,10 +76,10 @@ class SupplierController extends Controller
             $supplier->status = $status;
             $supplier->save();
         }
-        // return response()->json([
-        //     'fail' => false,
-        //     'message' => 'Successfully created',
-        // ]);
+        return response()->json([
+            'fail' => false,
+            'message' => 'Successfully created',
+        ]);
     }
 
 
@@ -91,16 +91,50 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('admin.supplier.edit_supplier', ['supplier' => $supplier]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required',
+            'email'  => 'required|email',
+            'phone'  => 'required',
+            'address'  => 'required',
+
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        } else {
+            $supplier = Supplier::find($id);
+            $supplier->company_name = $request->company_name;
+            $supplier->slug = Str::slug($request->company_name);
+            $supplier->contact_name = $request->contact_name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->fax = $request->fax;
+            $supplier->address = $request->address;
+            $supplier->description = $request->description;
+            $supplier->status = "1";
+            $supplier->save();
+        }
+        return response()->json([
+            'fail' => false,
+            'message' => 'Successfully created',
+        ]);
     }
 
     public function destroy($id)
     {
-        //
+        Supplier::find($id)->delete();
+        return response()->json([
+            'message' => 'Successfully deleted'
+        ]);
     }
 }
