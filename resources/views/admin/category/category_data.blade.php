@@ -17,42 +17,41 @@
     <tbody>
         @php $num=(($page-1)*$perPage)+1; @endphp
         @foreach($categories as $category)
-     
-        <tr>
-        <th scope="row">{{ $num++ }}</th>
-            <td>
-                {{$category->category_name}}
-                @foreach($category->subcategories as $subcat)
-                <ul><li>{{$subcat->sub_category_name}}</li></ul>
-                @endforeach
-            </td>
-           
-         
-             
-           
-     
-            <td>{{$category->description}}</td>
-            <td>{{$category->photo}}</td>
-            <td>{{$category->status}}</td>
-            <td> 
-                <!--edit button -->           
-                <a href="{{route('admin.category.edit', $category->category_id)}}" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#editCategoryModal" id="editButton"> <i class=" fas fa-edit"></i></a>
+      
+                <tr>
+                    <th scope="row">{{ $num++ }}</th>
+                        <td>
+                            {{$category->category_name}}
+                            {{-- @foreach($category->subcategories as $subcat)
+                            <ul><li>{{$subcat->sub_category_name}}</li></ul>
+                            @endforeach --}}
+                        </td>
+                        <td> {{$category->description}}</td>
+                        <td>{{$category->photo}}</td>
+                        <td>{{$category->status}}</td>
+                        <td> 
+                            <!--edit button -->           
+                            <a href="{{route('admin.category.edit', $category->category_id)}}" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#editCategoryModal" id="editButton"> <i class=" fas fa-edit"></i></a>
+            
+                            <!-- delete form --> 
+                           <form id="deleteForm" style="display: inline;" method="post" action="{{ route('admin.category.destroy', $category->category_id) }}">
+                                @csrf
+                                @method('DELETE') 
+                                 <button id="deleteButton" class="btn btn-sm btn-outline-light">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                    </td>
 
-                <!-- delete form --> 
-               <form id="deleteForm" style="display: inline;" method="post" action="{{ route('admin.category.destroy', $category->category_id) }}">
-                    @csrf
-                    @method('DELETE') 
-                     <button id="deleteButton" class="btn btn-sm btn-outline-light">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </form>
-        </td>
-        </tr>
+        
+                    </tr>
+
       
         @endforeach 
     </tbody>
 </table>
 {{$categories->links()}}
+
 
 
     <!-- ============================================================== -->

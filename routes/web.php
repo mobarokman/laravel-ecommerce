@@ -30,5 +30,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::get('tag-data', 'TagController@tagData')->name('tagData');
     Route::resource('supplier', 'SupplierController');
     Route::get('supplier-data', 'SupplierController@supplierData')->name('supplierData');
+    Route::resource('product', 'ProductController');
+    Route::get('product-data', 'ProductController@productData')->name('productData');
     
 });
