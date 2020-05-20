@@ -21,7 +21,7 @@ class CreateSuppliersTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('phone');
-            $table->string('fax');
+            $table->string('phone2')->nullable();
             $table->string('description');
             $table->string('status');
             $table->timestamps();

@@ -15,16 +15,23 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('product_id');
-            $table->integer('product_child_id');
             $table->string('product_name');
-            $table->string('description');
-            $table->string('photo');
-            $table->integer('supplier_id');
-            $table->integer('category_id');
-            $table->integer('sub_category_id');
-            $table->integer('tag_id');
-            $table->string('price');
-            $table->string('discount');
+            $table->string('slug');
+            $table->string('description')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('supplier_id')->nullable();
+            $table->string('category_id')->nullable();
+            $table->string('sub_category_id')->nullable();
+            $table->string('tag_id')->nullable();
+            $table->string('purchase_price')->nullable();
+            $table->string('sale_price')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('size')->nullable();
+            $table->string('color')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('rank')->nullable();
+            $table->integer('stock_quantity');
+            $table->integer('min_quantity');
             $table->timestamps();
         });
     }

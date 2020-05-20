@@ -1,0 +1,48 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    "files.autoSave": "afterDelay",
+    "window.zoomLevel": 0,
+    "liveServer.settings.fullReload": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "liveServer.settings.useWebExt": true,
+    "php.executablePath": "C:/xampp/php/php.exe",
+    "files.associations": {
+        "*.php": "php",
+        "*.blade.php": "blade"
+    },
+    "[php]": {
+
+        "editor.defaultFormatter": "kokororin.vscode-phpfmt"
+
+
+    },
+    "editor.suggestSelection": "first",
+    "editor.parameterHints.enabled": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.semanticHighlighting.enabled": true,
+    "[blade]": {
+
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "php.suggest.basic": false,
+    "editor.quickSuggestions": {
+        "comments": true
+    },
+
+    "editor.fontFamily":"Consolas, 'Courier New', monospace",
+
+    "editor.fontSize": 14,
+    "editor.lineHeight": 20,
+    "phpannotations.fontSize": 12,
+    "workbench.preferredLightColorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Darcula Theme from IntelliJ"
+
+
+
+
+
+
+
+}

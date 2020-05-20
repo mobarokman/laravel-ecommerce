@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Model\Category;
+use Illuminate\Support\Str;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -9,34 +10,18 @@ class CategoryTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
-     */
+     */ 
+    
+     
     public function run()
     {
-        Category::insert([
-            [
-                'category_id' => '1',
-                'category_name' => 'Computer',
-                'description' => 'this a simple category',
-                'slug' => 'computer',
-                'photo' => 'default.png',
-                'status' => '1',
-            ],
-            [
-                'category_id' => '2',
-                'category_name' => 'Kitchen Ware',
-                'description' => 'this a simple category',
-                'slug' => 'kitchen-ware',
-                'photo' => 'default.png',
-                'status' => '1',
-            ],
-            [
-                'category_id' => '3',
-                'category_name' => 'Mobile',
-                'description' => 'this a simple category',
-                'slug' => 'mobile',
-                'photo' => 'default.png',
-                'status' => '1',
-            ],
+        Category::create([
+            'category_name'          =>  'Root',
+            'description'   =>  'This is the root category, don\'t delete this one',
+            'parent_id'     =>  null,
+            'menu'          =>  0,
         ]);
+ 
+        factory('App\Model\Category', 10)->create();
     }
 }

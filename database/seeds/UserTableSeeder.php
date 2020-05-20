@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Model\User;
 class UserTableSeeder extends Seeder
 {
     /**
@@ -11,6 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        
         User::insert([
             [
                 'name' => 'Develop Admin',
@@ -23,5 +24,6 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('admin'),
             ],
         ]);
+    
     }
 }

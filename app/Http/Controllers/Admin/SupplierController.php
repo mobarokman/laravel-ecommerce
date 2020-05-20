@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Validator;
-use App\Model\Supplier;
 
 class SupplierController extends Controller
 {
@@ -21,22 +21,19 @@ class SupplierController extends Controller
         $data["perPage"] = $request->input("perPage", 5);
         $data["page"] = $request->input("page", 1);
         $data["search"] = $search = $request->search;
-        $data["suppliers"] = Supplier::when($search, function($query) use ($search){
+        $data["suppliers"] = Supplier::when($search, function ($query) use ($search) {
             $query->where("suppliers.company_name", "LIKE", "%{$search}%");
         })
-        ->latest()
-        ->paginate($data["perPage"]);
+            ->latest()
+            ->paginate($data["perPage"]);
         //dd($data["suppliers"]);
         return view('admin.supplier.supplier_data', $data);
     }
-
 
     public function create()
     {
         //
     }
-
- 
 
     public function store(Request $request)
     {
@@ -45,20 +42,20 @@ class SupplierController extends Controller
         $contact_name = $request->contact_name;
         $email = $request->email;
         $phone = $request->phone;
-        $fax = $request->fax;
+        $phone2 = $request->phone2;
         $address = $request->address;
         $description = $request->description;
         $status = "1";
 
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
-            'email'  => 'required|email',
-            'phone'  => 'required',
-            'address'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
 
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 'fail' => true,
                 'errors' => $validator->errors(),
@@ -70,7 +67,7 @@ class SupplierController extends Controller
             $supplier->contact_name = $contact_name;
             $supplier->email = $email;
             $supplier->phone = $phone;
-            $supplier->fax = $fax;
+            $supplier->phone2 = $phone2;
             $supplier->address = $address;
             $supplier->description = $description;
             $supplier->status = $status;
@@ -82,12 +79,10 @@ class SupplierController extends Controller
         ]);
     }
 
-
     public function show($id)
     {
         //
     }
-
 
     public function edit($id)
     {
@@ -97,16 +92,16 @@ class SupplierController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
-            'email'  => 'required|email',
-            'phone'  => 'required',
-            'address'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
 
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 'fail' => true,
                 'errors' => $validator->errors(),
@@ -134,7 +129,7 @@ class SupplierController extends Controller
     {
         Supplier::find($id)->delete();
         return response()->json([
-            'message' => 'Successfully deleted'
+            'message' => 'Successfully deleted',
         ]);
     }
 }
